@@ -28,6 +28,7 @@ const overlayPropTypes = {
   allowPinchZoom: PropTypes.bool,
   dangerouslyBypassFocusLock: PropTypes.bool,
   dangerouslyBypassScrollLock: PropTypes.bool,
+  noScrollIsolation: PropTypes.bool,
   // TODO:
   initialFocusRef: () => null,
   onDismiss: PropTypes.func,
@@ -119,6 +120,8 @@ export type DialogOverlayProps = DialogProps & {
    * @see https://github.com/theKashey/react-remove-scroll
    */
   dangerouslyBypassScrollLock?: boolean;
+
+  noScrollIsolation?: boolean;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,6 +135,7 @@ const DialogInner = forwardRef<HTMLDivElement, DialogOverlayProps>(
       allowPinchZoom,
       dangerouslyBypassFocusLock = false,
       dangerouslyBypassScrollLock = false,
+      noScrollIsolation = false,
       initialFocusRef,
       onClick,
       onDismiss = noop,
@@ -187,6 +191,7 @@ const DialogInner = forwardRef<HTMLDivElement, DialogOverlayProps>(
         <RemoveScroll
           allowPinchZoom={allowPinchZoom}
           enabled={!dangerouslyBypassScrollLock}
+          noIsolation={noScrollIsolation}
         >
           <div
             {...props}
